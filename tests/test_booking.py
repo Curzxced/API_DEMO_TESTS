@@ -32,3 +32,18 @@ class TestBooking:
         response = client.update_booking(created_booking, updated_payload, auth_token)
         assert response.status_code == 200
         assert response.json()["totalprice"] == 999
+    
+    def test_get_nonexistent_booking(self, client):
+        """Проверяем, что при запросе несуществующей брони вернется 404"""
+        response = client.get_booking(999999)
+        assert response.status_code == 404
+
+    @pytest.mark.parametrize("invalid_payload", [
+        {},
+        {"firstname": "Ivan"}
+    ])
+
+    def test_create_booking_negative(self, client, invalid_payload):
+        """Проверяем, что сервер не создаст бронь с невалидными данными"""
+        response = client.create_booking(invalid_payload)
+        assert response.status_code in [400, 500], f"Ожидалась ошибка, но получен {response.status_code}"
