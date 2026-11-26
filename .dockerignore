@@ -1,0 +1,14 @@
+# Игнорируем окружения, чтобы не тащить их в контейнер
+venv/
+.venv/
+env/
+
+# Игнорируем кэш Python и Pytest
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Игнорируем настройки IDE и системный мусор
+.vscode/
+.idea/
+.DS_Store
