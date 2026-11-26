@@ -21,7 +21,6 @@ class TestBooking:
         assert get_resp.status_code == 200
         assert get_resp.json()["firstname"] == booking_payload["firstname"]
         
-        # Чистим данные вручную, нет фикстуры с teardown
         client.delete_booking(booking_id, auth_token)
 
     def test_update_booking(self, client, created_booking, booking_payload, auth_token):
