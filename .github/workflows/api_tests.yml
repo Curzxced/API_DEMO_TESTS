@@ -1,0 +1,36 @@
+name: API Автотесты
+
+# Когда запускать тесты
+on:
+  push:
+    branches: [ "main", "master" ] # при пуше в main
+  pull_request:
+    branches: [ "main", "master" ] # и при создании pull request
+
+# Что именно делать
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest # берем последнюю версию Ubuntu (дистрибутив линукса)
+
+    steps:
+      # 1
+      - name: Скачивание репозитория
+        uses: actions/checkout@v4
+
+      # 2
+      - name: Установка Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.14' # 3.15 слишком свежая, для подстраховки на версию ниже взял
+          cache: 'pip' # кэшируем зависимости чтобы тесты запускались быстрее
+
+      # 3
+      - name: Установка зависимостей
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # 4
+      - name: Запуск Pytest
+        run: |
+          pytest tests/ -v
