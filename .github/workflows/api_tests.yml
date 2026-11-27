@@ -33,4 +33,4 @@ jobs:
       # 4
       - name: Запуск Pytest
         run: |
-          pytest tests/ -v
+          python -m pytest tests/ -v

@@ -1,6 +1,6 @@
 services:
   api-tests:
     build: .
-    container_name: x5_api_tests
+    container_name: api_tests
     # environment:
     #   - BASE_URL=https://restful-booker.herokuapp.com
